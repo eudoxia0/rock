@@ -45,3 +45,26 @@
    (versions :reader versions
              :initarg :versions
              :type list)))
+
+(defgeneric file-url (source version filepath)
+  (:documentation "The full URL of a file in a particular subclass of
+  `<source>`."))
+
+(defmethod file-url ((source <google-cdn>) version filepath)
+  (format nil "https://ajax.googleapis.com/ajax/libs/~A/~A/~A"
+          (name source) version filepath))
+
+(defmethod file-url ((source <maxcdn>) version filepath)
+  (format nil "https://maxcdn.bootstrapcdn.com/~A/~A/~A"
+          (library source) version filepath))
+
+(defmethod file-url ((source <cdnjs>) version filepath)
+  (format nil "https://cdnjs.cloudflare.com/ajax/libs/~A/~A/~A"
+          (library source) version filepath))
+
+(defmethod file-url ((source <github>) version filepath)
+  (format nil "https://raw.githubusercontent.com/~A/~A/~A/~A"
+          (user source)
+          (repo source)
+          (cdr (assoc version (versions source)))
+          filepath))
