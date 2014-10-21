@@ -1,13 +1,5 @@
 (in-package :rock)
 
-;;; Asset database
-
-(defparameter *assets* (make-hash-table))
-
-(defmacro defasset (name class &rest params)
-  `(setf (gethash ,(intern (symbol-name name) :keyword) *assets*)
-         (make-instance ',class ,@params)))
-
 ;;; Google CDN
 
 (defasset angular.js <google-cdn>

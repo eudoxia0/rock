@@ -68,3 +68,14 @@
           (repo source)
           (cdr (assoc version (versions source)))
           filepath))
+
+;;; Asset database
+
+(defparameter *assets* (make-hash-table))
+
+(defmacro defasset (name class &rest params)
+  `(setf (gethash ,(intern (symbol-name name) :keyword) *assets*)
+         (make-instance ',class ,@params)))
+
+(defun find-asset (name)
+  (gethash name *assets*))
