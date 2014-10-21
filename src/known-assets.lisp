@@ -264,13 +264,13 @@
                   :2.1.1
                   :2.1.0
                   :2.0.4)
-  :js (list "bootstrap.min.js")
-  :css (list "bootstrap.min.css"))
+  :js (list "js/bootstrap.min.js")
+  :css (list "css/bootstrap.min.css"))
 
 (defasset fontawesome <maxcdn>
   :library "font-awesome"
   :versions (list :4.2.0)
-  :css (list "font-awesome.min.css"))
+  :css (list "css/font-awesome.min.css"))
 
 ;;; cdnjs
 
