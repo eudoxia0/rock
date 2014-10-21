@@ -1,17 +1,20 @@
 (in-package :rock)
 
-(defclass <source> () ())
+(defclass <source> ()
+  ((js :reader js
+       :initarg :js
+       :type (list-of string))
+   (css :reader css
+        :initarg :css
+        :type (list-of string))
+   (files :reader files
+          :initarg :files
+          :type (list-of string))))
 
 (defclass <google-cdn> (<source>)
   ((name :reader name
          :initarg :name
          :type string)
-   (js-filename :reader js-filename
-                :initarg :js-filename
-                :type string)
-   (css-filename :reader css-filename
-                 :initarg :css-filename
-                 :type string)
    (versions :reader versions
              :initarg :versions
              :type list)))
@@ -22,13 +25,7 @@
             :type string)
    (versions :reader versions
              :initarg :versions
-             :type list)
-   (js-filename :reader js-filename
-                :initarg :js-filename
-                :type string)
-   (css-filename :reader css-filename
-                 :initarg :css-filename
-                 :type string)))
+             :type list)))
 
 (defclass <cdnjs> (<source>)
   ((library :reader library
@@ -36,10 +33,7 @@
             :type string)
    (versions :reader versions
              :initarg :versions
-             :type list)
-   (files :reader files
-          :initarg :files
-          :type list)))
+             :type list)))
 
 (defclass <github> (<source>)
   ((user :reader user
@@ -50,7 +44,4 @@
          :type string)
    (versions :reader versions
              :initarg :versions
-             :type list)
-   (path :reader path
-         :initarg :path
-         :type string)))
+             :type list)))

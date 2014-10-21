@@ -12,7 +12,7 @@
 
 (defasset angular.js <google-cdn>
   :name "angularjs"
-  :js-filename "angular.min.js"
+  :js (list "angular.min.js")
   :versions (list :1.2.26
                   :1.2.25
                   :1.2.24
@@ -76,7 +76,7 @@
 
 (defasset jquery <google-cdn>
   :name "jquery"
-  :js-filename "jquery.min.js"
+  :js (list "jquery.min.js")
   :versions (list :2.1.1
                   :2.1.0
                   :2.0.3
@@ -118,8 +118,8 @@
 
 (defasset jquery-ui <google-cdn>
   :name "jqueryui"
-  :js-filename "jquery-ui.min.js"
-  :css-filename "jquery-ui.css"
+  :js (list "jquery-ui.min.js")
+  :css (list "jquery-ui.css")
   :versions (list :1.11.2
                   :1.11.1
                   :1.11.0
@@ -256,13 +256,13 @@
                   :2.1.1
                   :2.1.0
                   :2.0.4)
-  :js-filename "bootstrap.min.js"
-  :css-filename "bootstrap.min.css")
+  :js (list "bootstrap.min.js")
+  :css (list "bootstrap.min.css"))
 
 (defasset fontawesome <maxcdn>
   :library "font-awesome"
   :versions (list :4.2.0)
-  :css-filename "font-awesome.min.css")
+  :css (list "font-awesome.min.css"))
 
 ;;; cdnjs
 
@@ -289,4 +289,4 @@
   :user "lyonbros"
   :repo "composer.js"
   :versions (list (cons :1.0 "170c0cc96a99e375818f91567043ced53d5cf734"))
-  :path "composer.min.js")
+  :files (list "composer.min.js"))

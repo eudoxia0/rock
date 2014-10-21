@@ -8,7 +8,8 @@
   :author "Fernando Borretti"
   :license "MIT"
   :depends-on (:trivial-download
-               :trivial-extract)
+               :trivial-extract
+               :trivial-types)
   :components ((:module "src"
                 :components
                 ((:file "package")
