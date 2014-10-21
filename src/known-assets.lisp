@@ -164,6 +164,8 @@
                   :1.5.2))
 
 (defasset mootools <google-cdn>
+  :name "mootools"
+  :js (list "mootools-yui-compressed.js")
   :versions (list :1.5.1
                   :1.5.0
                   :1.4.5
@@ -184,6 +186,8 @@
                   :1.1.1))
 
 (defasset prototype <google-cdn>
+  :name "prototype"
+  :js (list "prototype.js")
   :versions (list :1.7.2.0
                   :1.7.1.0
                   :1.7.0.0
@@ -191,10 +195,14 @@
                   :1.6.0.3
                   :1.6.0.2))
 
-(defasset prototype <google-cdn>
+(defasset three.js <google-cdn>
+  :name "threejs"
+  :js (list "three.min.js")
   :versions (list :r67))
 
 (defasset dojo <google-cdn>
+  :name "dojo"
+  :js (list "dojo/dojo.js")
   :versions (list :1.10.1
                   :1.10.0
                   :1.9.4
