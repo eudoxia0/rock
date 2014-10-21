@@ -16,8 +16,8 @@
                 ((:file "package")
                  (:file "files")
                  (:file "providers")
-                 (:file "known-assets")
-                 (:file "environments"))))
+                 (:file "environments")
+                 (:file "known-assets"))))
   :description "Asset manager for Common Lisp."
   :long-description
   #.(uiop:read-file-string
