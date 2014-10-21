@@ -9,13 +9,15 @@
   :license "MIT"
   :depends-on (:trivial-download
                :trivial-extract
-               :trivial-types)
+               :trivial-types
+               :asdf)
   :components ((:module "src"
                 :components
                 ((:file "package")
                  (:file "files")
                  (:file "providers")
-                 (:file "known-assets"))))
+                 (:file "known-assets")
+                 (:file "environments"))))
   :description "Asset manager for Common Lisp."
   :long-description
   #.(uiop:read-file-string
