@@ -1,11 +1,11 @@
 (in-package :rock)
 
-(defmacro make-asset (name version)
-  `(make-instance '<asset-instance>
-                  :name (find-asset ,name)
+(defmacro make-asset (asset-name version)
+  `(make-instance '<asset-version>
+                  :asset (find-asset ,asset-name)
                   :version ,version))
 
-(defun make-bundle (kind &key assets destination)
+(defmacro make-bundle (kind &key assets destination)
   `(make-instance '<bundle>
                   :kind ,kind
                   :assets (list
@@ -19,12 +19,14 @@
          (make-instance '<environment>
                         :system-name ,system-name
                         :assets-directory ,assets-directory
-                        :assets (list
-                                 ,@(loop for asset in assets collecting
-                                         `(make-asset ,@asset)))
-                        :bundles (list
-                                  ,@(loop for bundle in bundles collecting
-                                          `(make-bundle ,@bundle))))))
+                        :dependencies
+                        (list
+                         ,@(loop for asset in assets collecting
+                             `(make-asset ,@asset)))
+                        :bundles
+                        (list
+                         ,@(loop for bundle in bundles collecting
+                             `(make-bundle ,@bundle))))))
 
 (defun build (system-name)
   "Build the environment associated with `system-name`."
