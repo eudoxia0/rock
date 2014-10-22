@@ -2,7 +2,7 @@
 
 ;;; Google CDN
 
-(defasset angular.js <google-cdn>
+(defasset angular.js <google-asset>
   :name "angularjs"
   :js (list "angular.min.js")
   :versions (list :1.2.26
@@ -66,7 +66,7 @@
                   :1.3.0-beta.2
                   :1.3.0-beta.1))
 
-(defasset jquery <google-cdn>
+(defasset jquery <google-asset>
   :name "jquery"
   :js (list "jquery.min.js")
   :versions (list :2.1.1
@@ -108,7 +108,7 @@
                   :1.2.6
                   :1.2.3))
 
-(defasset jquery-ui <google-cdn>
+(defasset jquery-ui <google-asset>
   :name "jqueryui"
   :js (list "jquery-ui.min.js")
   :css (list "jquery-ui.css")
@@ -155,7 +155,7 @@
                   :1.5.3
                   :1.5.2))
 
-(defasset mootools <google-cdn>
+(defasset mootools <google-asset>
   :name "mootools"
   :js (list "mootools-yui-compressed.js")
   :versions (list :1.5.1
@@ -177,7 +177,7 @@
                   :1.1.2
                   :1.1.1))
 
-(defasset prototype <google-cdn>
+(defasset prototype <google-asset>
   :name "prototype"
   :js (list "prototype.js")
   :versions (list :1.7.2.0
@@ -187,12 +187,12 @@
                   :1.6.0.3
                   :1.6.0.2))
 
-(defasset three.js <google-cdn>
+(defasset three.js <google-asset>
   :name "threejs"
   :js (list "three.min.js")
   :versions (list :r67))
 
-(defasset dojo <google-cdn>
+(defasset dojo <google-asset>
   :name "dojo"
   :js (list "dojo/dojo.js")
   :versions (list :1.10.1
@@ -238,8 +238,8 @@
 
 ;;; MaxCDN
 
-(defasset bootstrap <maxcdn>
-  :library "bootstrap"
+(defasset bootstrap <bootstrap-cdn-asset>
+  :name "bootstrap"
   :versions (list :3.2.0
                   :3.1.1
                   :3.1.0
@@ -259,15 +259,15 @@
   :js (list "js/bootstrap.min.js")
   :css (list "css/bootstrap.min.css"))
 
-(defasset fontawesome <maxcdn>
-  :library "font-awesome"
+(defasset fontawesome <bootstrap-cdn-asset>
+  :name "font-awesome"
   :versions (list :4.2.0)
   :css (list "css/font-awesome.min.css"))
 
 ;;; cdnjs
 
-(defasset leaflet <cdnjs>
-  :library "leaflet"
+(defasset leaflet <cdnjs-asset>
+  :name "leaflet"
   :versions (list :0.7.3
                   :0.7.2
                   :0.7.1
@@ -275,8 +275,8 @@
   :files (list "leaflet.js"
                "leaflet.css"))
 
-(defasset backbone.js <cdnjs>
-  :library "backbone.js"
+(defasset backbone.js <cdnjs-asset>
+  :name "backbone.js"
   :versions (list :1.1.2
                   :1.1.1
                   :1.1.0
@@ -285,8 +285,8 @@
 
 ;;; GitHub
 
-(defasset composer.js <github>
-  :user "lyonbros"
-  :repo "composer.js"
+(defasset composer.js <github-asset>
+  :username "lyonbros"
+  :name "composer.js"
   :versions (list (cons :1.0 "170c0cc96a99e375818f91567043ced53d5cf734"))
   :files (list "composer.min.js"))

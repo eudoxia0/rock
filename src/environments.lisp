@@ -1,17 +1,6 @@
 (in-package :rock)
 
-;;; Environment and bundle classes
-
-(defclass <asset-instance> ()
-  ((name :reader name
-          :initarg :name
-          :type keyword)
-   (version :reader version
-            :initarg :version
-            :type keyword)))
-
-(defmethod get-asset ((asset <asset-instance>))
-  (find-asset (name asset)))
+;;; Bundles and Environments
 
 (defclass <bundle> ()
   ((kind :reader kind
@@ -19,7 +8,7 @@
          :type keyword)
    (assets :reader assets
            :initarg :assets
-           :type (list-of <asset-instance>))
+           :type (list-of <asset-version>))
    (destination :reader destination
                 :initarg :destination
                 :type pathname)))
@@ -32,70 +21,69 @@
                      :initarg :assets-directory
                      :initform #p"assets/"
                      :type pathname)
-   (assets :reader assets
-           :initarg :assets
-           :type (list-of <asset-instance>))
+   (dependencies :reader dependencies
+                 :initarg :dependencies
+                 :type (list-of <asset-version>))
    (bundles :reader bundles
             :initarg :bundles
             :type (list-of <bundle>))))
 
+(defparameter *environments*
+  (make-hash-table))
+
+(defun get-env (system-name)
+  (gethash system-name *environments*))
+
 ;;; Methods for downloading the assets
 
-(defmethod full-assets-pathname ((env <environment>))
+(defmethod full-assets-directory ((env <environment>))
+  "The absolute path to an environment's assets directory."
   (asdf:system-relative-pathname (system-name env)
                                  (assets-directory env)))
 
 (defmethod env-relative-pathname ((env <environment>) (path pathname))
+  "A pathname relative to an environment's assets directory."
   (merge-pathnames path
-                   (full-assets-pathname env)))
+                   (full-assets-directory env)))
 
-(defmethod asset-directory ((asset <asset-instance>) (env <environment>))
-  (let ((asset-name (string-downcase (symbol-name (name asset)))))
-    (env-relative-pathname env
-                           (make-pathname
-                            :directory (list :relative asset-name)))))
+(defun keyword-to-string (keyword)
+  (string-downcase (symbol-name keyword)))
 
-(defmethod asset-local-pathname ((asset <asset-instance>) (env <environment>)
+(defmethod asset-directory-name ((asset-v <asset-version>))
+  (concatenate 'string
+               (keyword-to-string (name (asset asset-v)))
+               "-"
+               (keyword-to-string (symbol-name (version asset-v)))))
+
+(defmethod asset-directory ((asset-v <asset-version>) (env <environment>))
+  "The directory of an asset version within an environment."
+  (env-relative-pathname
+   env
+   (make-pathname
+    :directory (list :relative (asset-directory-name asset-v)))))
+
+(defmethod asset-local-pathname ((asset-v <asset-version>) (env <environment>)
                                  (file string))
+  "The local pathname of an asset version's file in an environment."
   (merge-pathnames (parse-namestring file)
-                   (asset-directory asset env)))
+                   (asset-directory asset-v env)))
 
-(defmethod download-asset ((asset <asset-instance>) (env <environment>))
-  (let ((base-asset (get-asset asset)))
+(defmethod download-asset ((asset-v <asset-version>) (env <environment>))
+  "Download all the files in an asset."
+  (let ((base-asset (asset asset-v)))
     (loop for js-file in (js base-asset) do
-      (let ((remote (file-url base-asset (version asset) js-file))
-            (local (asset-local-pathname asset env js-file)))
+      (let ((remote (file-url asset-v js-file))
+            (local (asset-local-pathname asset-v env js-file)))
         (print remote)
         (print local)))))
 
-(defmethod build ((env <environment>))
+(defmethod build-bundle ((bundle <bundle>)))
+
+(defmethod build-env ((env <environment>))
+  "Build an environment: Download all dependencies and build all its bundles."
   ;; Download all the dependencies
   (loop for asset in (assets env) do
-    (download-asset asset env)))
-
-;;; Macros
-
-(defmacro make-asset (name version)
-  `(make-instance '<asset-instance>
-                  :name ,name
-                  :version ,version))
-
-(defun make-bundle (kind &key assets destination)
-  `(make-instance '<bundle>
-                  :kind ,kind
-                  :assets (list
-                           ,@(loop for asset in assets collecting
-                               `(make-asset ,@asset)))
-                  :destination ,destination))
-
-(defmacro defenv (system-name &key assets bundles
-                                (assets-directory #p"assets/"))
-  `(make-instance '<environment>
-                  :system-name ,system-name
-                  :assets-directory ,assets-directory
-                  :assets (list
-                           ,@(loop for asset in assets collecting
-                               `(make-asset ,@asset)))
-                  :bundles (list
-                            ,@(loop for bundle in bundles collecting
-                                `(make-bundle ,@bundle)))))
+    (download-asset asset env))
+  ;; Build the bundles
+  (loop for bundle in (bundles env) do
+    (build-bundle bundle)))
