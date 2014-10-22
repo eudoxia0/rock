@@ -2,7 +2,10 @@
 
 ;;; Assets
 
-(defclass <asset> ()
+(defclass <asset> () ()
+  (:documentation "The base class of all assets."))
+
+(defclass <common-asset> (<asset>)
   ((name :reader name
          :initarg :name
          :type string
@@ -23,20 +26,33 @@
              :initarg :versions
              :type list
              :documentation "A list of versions (Each a keyword like `:1.2.3`)."))
-  (:documentation "Represents an asset: A collection of files with multiple versions."))
+  (:documentation "The most common kind of asset: A collection of files with
+  multiple versions."))
 
 ;;; Assets + Providers
 
-(defclass <google-asset> (<asset>) ())
+(defclass <google-asset> (<common-asset>) ())
 
-(defclass <bootstrap-cdn-asset> (<asset>) ())
+(defclass <bootstrap-cdn-asset> (<common-asset>) ())
 
-(defclass <cdnjs-asset> (<asset>) ())
+(defclass <cdnjs-asset> (<common-asset>) ())
 
-(defclass <github-asset> (<asset>)
+(defclass <github-asset> (<common-asset>)
   ((username :reader username
              :initarg :username
              :type string)))
+
+(defclass <web-asset> (<asset>)
+  ((base-url :reader base-url
+             :initarg :base-url
+             :type string
+             :documentation "The base URL for the files in the file slot.")
+   (files :reader files
+          :initarg :files
+          :type (list-of string)
+          :documentation "A list of general assets."))
+  (:documentation "A collection of files to download from some base URL. Useful
+  for downloading images, etc."))
 
 (defgeneric format-string (asset)
   (:documentation "The format string for a asset's URL with the library name,
