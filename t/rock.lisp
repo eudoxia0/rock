@@ -15,7 +15,8 @@
              :assets ((:jquery :2.1.0))
              :destination #p"js/old.js")))
 
-(test simple
-  (is (equal 1 1)))
+(test build
+  (finishes
+    (rock:build :rock-test)))
 
 (run! 'tests)

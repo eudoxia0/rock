@@ -15,6 +15,7 @@
 
 (defmacro defenv (system-name &key assets bundles
                                 (assets-directory #p"assets/"))
+  "Define an environment."
   `(setf (gethash ,system-name *environments*)
          (make-instance '<environment>
                         :system-name ,system-name

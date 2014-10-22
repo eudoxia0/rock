@@ -46,14 +46,11 @@
   (merge-pathnames path
                    (full-assets-directory env)))
 
-(defun keyword-to-string (keyword)
-  (string-downcase (symbol-name keyword)))
-
 (defmethod asset-directory-name ((asset-v <asset-version>))
   (concatenate 'string
-               (keyword-to-string (name (asset asset-v)))
+               (name (asset asset-v))
                "-"
-               (keyword-to-string (symbol-name (version asset-v)))))
+               (string-downcase (symbol-name (version asset-v)))))
 
 (defmethod asset-directory ((asset-v <asset-version>) (env <environment>))
   "The directory of an asset version within an environment."
@@ -82,8 +79,8 @@
 (defmethod build-env ((env <environment>))
   "Build an environment: Download all dependencies and build all its bundles."
   ;; Download all the dependencies
-  (loop for asset in (assets env) do
-    (download-asset asset env))
+  (loop for asset-v in (dependencies env) do
+    (download-asset asset-v env))
   ;; Build the bundles
   (loop for bundle in (bundles env) do
     (build-bundle bundle)))

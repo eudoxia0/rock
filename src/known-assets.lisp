@@ -289,4 +289,4 @@
   :username "lyonbros"
   :name "composer.js"
   :versions (list (cons :1.0 "170c0cc96a99e375818f91567043ced53d5cf734"))
-  :files (list "composer.min.js"))
+  :js (list "composer.min.js"))
