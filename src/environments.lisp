@@ -71,8 +71,7 @@
     (loop for js-file in (js base-asset) do
       (let ((remote (file-url asset-v js-file))
             (local (asset-local-pathname asset-v env js-file)))
-        (print remote)
-        (print local)))))
+        (trivial-download:download remote local)))))
 
 (defmethod build-bundle ((bundle <bundle>)))
 
