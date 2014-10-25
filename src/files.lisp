@@ -1,7 +1,10 @@
 (in-package :rock)
 
 (defun concatenate-files (files target)
-  "Concatenate the files in `files` (A list of pathnames) into `target`."
+  "Concatenate the files in `files` (A list of pathnames) into `target`. Ensure
+the parent directories of `target` exist."
+  (let ((dir (fad:pathname-directory-pathname target)))
+    (ensure-directories-exist dir))
   (with-open-file (output-stream target
                                  :direction :output
                                  :if-exists :supersede
