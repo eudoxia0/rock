@@ -14,3 +14,7 @@ the parent directories of `target` exist."
                                     :direction :input
                                     :if-does-not-exist :error)
         (cl-fad:copy-stream input-stream output-stream)))))
+
+(defun download (url destination)
+  (unless (probe-file destination)
+    (trivial-download:download url destination)))

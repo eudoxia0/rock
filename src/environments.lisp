@@ -81,7 +81,7 @@
   (loop for file in files do
     (let ((remote (file-url asset-v file))
           (local (asset-local-pathname asset-v env file)))
-      (trivial-download:download remote local))))
+      (download remote local))))
 
 (defmethod download-asset ((asset-v <asset-version>) (env <environment>))
   "Download all the files in an asset."
