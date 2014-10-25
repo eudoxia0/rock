@@ -18,15 +18,17 @@
 (defun footer ()
   (markup
    (:footer
-    (:span "Made by "
-           (:a :href "https://github.com/eudoxia0" "eudoxia"))
-    (:span :class "credit"
-           "Images by "
-           (:a :href "https://www.flickr.com/photos/superfamous/" "superfamous")
-           ", licensed under the "
-           (:a :href "http://creativecommons.org/licenses/by/3.0/"
-               "CC Attribution 3.0")
-           " license."))
+    (:ul
+     (:li "Made by "
+          (:a :href "https://github.com/eudoxia0" "eudoxia"))
+     (:li :class "credit"
+          "Images by "
+          (:a :href "https://www.flickr.com/photos/superfamous/" "superfamous")
+          ", licensed under the "
+          (:a :href "http://creativecommons.org/licenses/by/3.0/"
+              "CC Attribution 3.0")
+          " license, via "
+          (:a :href "http://thestocks.im/" "thestocks.im"))))
    (:script :src "assets/build/js/scripts.js" "")))
 
 (defun header ()
@@ -47,4 +49,12 @@
 
 (defun index ()
   (page
-   (:h1 "Rock")))
+   (:main
+    (:p :class "desc"
+        "Rock as an "
+        (:strong "asset manager")
+        " and "
+        (:strong "compiler")
+        " for Common Lisp web applications. It downloads different versions of
+the most popular web development libraries (Bootstrap, jQuery, FontAwesome,
+etc.) and lets you compile them to single files."))))
