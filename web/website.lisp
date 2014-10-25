@@ -32,7 +32,8 @@
 (defun header ()
   (markup
    (:header
-    "Header")))
+    (:h1 :class "title"
+         "Rock"))))
 
 (defmacro page (&rest content)
   `(html5
