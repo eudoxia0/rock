@@ -9,8 +9,14 @@
   :depends-on (:rock
                :cl-markup
                :lass)
-  :components ((:module "web"
+  :components ((:module "assets/css"
+                :components
+                ((:static-file "style.lass")))
+               (:module "web"
                 :serial t
                 :components
-                ((:file "templates")
-                 (:file "files")))))
+                ((:file "website")
+                 (:file "files")
+                 ;;; Assets are compiled last, the LASS has to be converted to
+                 ;;; CSS first
+                 (:file "assets")))))

@@ -6,5 +6,8 @@
 *.x86f
 *~
 .#*
+assets/build/
+assets/bootstrap*
+assets/jquery*
 *.css
 *.html
