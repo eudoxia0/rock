@@ -1,7 +1,5 @@
 (in-package :rock)
 
-;;; Google CDN
-
 (defasset angular.js <google-asset>
   :name "angularjs"
   :js (list "angular.min.js")
@@ -236,8 +234,6 @@
                   :1.2.0
                   :1.1.1))
 
-;;; MaxCDN
-
 (defasset bootstrap <bootstrap-cdn-asset>
   :name "bootstrap"
   :versions (list :3.2.0
@@ -264,8 +260,6 @@
   :versions (list :4.2.0)
   :css (list "css/font-awesome.min.css"))
 
-;;; cdnjs
-
 (defasset leaflet <cdnjs-asset>
   :name "leaflet"
   :versions (list :0.7.3
@@ -282,8 +276,6 @@
                   :1.1.0
                   :1.0.0)
   :files (list "backbone.min.js"))
-
-;;; GitHub
 
 (defasset composer.js <github-asset>
   :username "lyonbros"
