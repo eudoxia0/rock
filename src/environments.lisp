@@ -65,13 +65,21 @@
   (merge-pathnames (parse-namestring file)
                    (asset-directory asset-v env)))
 
+(defmethod download-file-list ((asset-v <asset-version>) (env <environment>) files)
+  (loop for file in files do
+    (let ((remote (file-url asset-v file))
+          (local (asset-local-pathname asset-v env file)))
+      (trivial-download:download remote local))))
+
 (defmethod download-asset ((asset-v <asset-version>) (env <environment>))
   "Download all the files in an asset."
   (let ((base-asset (asset asset-v)))
-    (loop for js-file in (js base-asset) do
-      (let ((remote (file-url asset-v js-file))
-            (local (asset-local-pathname asset-v env js-file)))
-        (trivial-download:download remote local)))))
+    (when (slot-boundp base-asset 'js)
+      (download-file-list asset-v env (js base-asset)))
+    (when (slot-boundp base-asset 'css)
+      (download-file-list asset-v env (css base-asset)))
+    (when (slot-boundp base-asset 'files)
+      (download-file-list asset-v env (files base-asset)))))
 
 (defmethod build-bundle ((bundle <bundle>)))
 
