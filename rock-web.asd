@@ -9,6 +9,7 @@
   :depends-on (:rock
                :cl-markup
                :lass)
+  :serial t
   :components ((:module "assets/css"
                 :components
                 ((:static-file "style.lass")))

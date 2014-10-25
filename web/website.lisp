@@ -6,9 +6,6 @@
 
 ;;; Templates
 
-(defparameter +header-image-url+
-  "https://farm3.staticflickr.com/2840/9042399407_bf04388aca_o.jpg")
-
 (defun head ()
   (markup
    (:head
@@ -35,7 +32,6 @@
 (defun header ()
   (markup
    (:header
-    (:img :src +header-image-url+)
     "Header")))
 
 (defmacro page (&rest content)
