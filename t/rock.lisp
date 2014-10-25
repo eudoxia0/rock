@@ -3,6 +3,12 @@
   (:use :cl :fiveam))
 (in-package :rock-test)
 
+(defparameter +assets-directory+
+  (asdf:system-relative-pathname :rock #p"assets/"))
+
+(defun asset-relative-path (path)
+  (merge-pathnames path +assets-directory+))
+
 (def-suite tests)
 (in-suite tests)
 
@@ -17,25 +23,30 @@
                  :assets ((:jquery :2.1.0))
                  :destination #p"js/old.js")))))
 
+(defun destroy-assets-directory ()
+  (when (cl-fad:directory-exists-p +assets-directory+)
+     (cl-fad:delete-directory-and-files
+      +assets-directory+)))
+
 (test setup
   (finishes
-    (cl-fad:delete-directory-and-files
-     (asdf:system-relative-pathname :rock #p"assets/"))))
+    (destroy-assets-directory)))
 
 (test build
   (finishes
     (rock:build :rock-test))
   (is-true
    (probe-file
-    (asdf:system-relative-pathname :rock
-                                   #p"assets/jquery-2.1.0/jquery.min.js")))
+    (asset-relative-path #p"jquery-2.1.0/jquery.min.js")))
   (is-true
    (probe-file
-    (asdf:system-relative-pathname :rock
-                                   #p"assets/jquery-1.9.1/jquery.min.js")))
+    (asset-relative-path #p"jquery-1.9.1/jquery.min.js")))
   (is-true
    (probe-file
-    (asdf:system-relative-pathname :rock
-                                   #p"assets/composer.js-1.0/composer.min.js"))))
+    (asset-relative-path #p"composer.js-1.0/composer.min.js"))))
+
+(test cleanup
+  (finishes
+    (destroy-assets-directory)))
 
 (run! 'tests)
