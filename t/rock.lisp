@@ -18,9 +18,10 @@
       :assets ((:jquery :2.1.0)
                (:jquery :1.9.1)
                (:composer.js :1.0))
-      :bundles ((;; Old jquery, standalone
+      :bundles ((;; Old jquery + composer
                  :js
-                 :assets ((:jquery :2.1.0))
+                 :assets ((:jquery :2.1.0)
+                          (:composer.js :1.0))
                  :destination #p"js/old.js")))))
 
 (defun destroy-assets-directory ()
@@ -43,7 +44,10 @@
     (asset-relative-path #p"jquery-1.9.1/jquery.min.js")))
   (is-true
    (probe-file
-    (asset-relative-path #p"composer.js-1.0/composer.min.js"))))
+    (asset-relative-path #p"composer.js-1.0/composer.min.js")))
+  (is-true
+   (probe-file
+    (asset-relative-path #p"build/js/old.js"))))
 
 (test cleanup
   (finishes

@@ -46,6 +46,9 @@
   (merge-pathnames path
                    (full-assets-directory env)))
 
+(defmethod env-build-directory ((env <environment>))
+  (env-relative-pathname env #p"build/"))
+
 (defmethod asset-directory-name ((asset-v <asset-version>))
   (concatenate 'string
                (name (asset asset-v))
@@ -81,7 +84,21 @@
     (when (slot-boundp base-asset 'files)
       (download-file-list asset-v env (files base-asset)))))
 
-(defmethod build-bundle ((bundle <bundle>)))
+(defmethod build-bundle ((bundle <bundle>) (env <environment>))
+  (let* ((files-to-concatenate
+           (loop for asset-v in (assets bundle) appending
+             (case (kind bundle)
+               (:js
+                (loop for file in (js (asset asset-v)) collecting
+                  (asset-local-pathname asset-v env file)))
+               (:css
+                (loop for file in (css (asset asset-v)) collecting
+                  (asset-local-pathname asset-v env file)))
+               (t
+                (error "Unknown bundle kind."))))))
+    (concatenate-files files-to-concatenate
+                       (merge-pathnames (destination bundle)
+                                        (env-build-directory env)))))
 
 (defmethod build-env ((env <environment>))
   "Build an environment: Download all dependencies and build all its bundles."
@@ -90,4 +107,4 @@
     (download-asset asset-v env))
   ;; Build the bundles
   (loop for bundle in (bundles env) do
-    (build-bundle bundle)))
+    (build-bundle bundle env)))
