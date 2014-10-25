@@ -5,12 +5,13 @@
                   :asset (find-asset ,asset-name)
                   :version ,version))
 
-(defmacro make-bundle (kind &key assets destination)
+(defmacro make-bundle (kind &key assets files destination)
   `(make-instance '<bundle>
                   :kind ,kind
                   :assets (list
                            ,@(loop for asset in assets collecting
                                `(make-asset ,@asset)))
+                  :files ,files
                   :destination ,destination))
 
 (defmacro defenv (system-name &key assets bundles

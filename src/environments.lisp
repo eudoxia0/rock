@@ -5,13 +5,22 @@
 (defclass <bundle> ()
   ((kind :reader kind
          :initarg :kind
-         :type keyword)
+         :type keyword
+         :documentation "A `:js` bundle or a `:css` bundle.")
    (assets :reader assets
            :initarg :assets
-           :type (list-of <asset-version>))
+           :type (list-of <asset-version>)
+           :documentation "The assets from the environment that will be bundled.")
+   (files :reader files
+          :initarg :files
+          :type (list-of pathname))
    (destination :reader destination
                 :initarg :destination
-                :type pathname)))
+                :type pathname
+                :documentation "The pathname of the compiled bundle."))
+  (:documentation "A bundle is a collection of assets and static files. Those
+  files, and the files corresponding to the bundle's kind in each asset, will be
+  concatenated together into the destination pathname."))
 
 (defclass <environment> ()
   ((system-name :reader system-name
@@ -96,6 +105,14 @@
                   (asset-local-pathname asset-v env file)))
                (t
                 (error "Unknown bundle kind."))))))
+    (when (slot-boundp bundle 'files)
+      (let* ((extra-files (files bundle))
+             (full-file-pathnames
+               (loop for file in extra-files collecting
+                 (env-relative-pathname env file))))
+        (setf files-to-concatenate
+              (append files-to-concatenate
+                      full-file-pathnames))))
     (concatenate-files files-to-concatenate
                        (merge-pathnames (destination bundle)
                                         (env-build-directory env)))))
