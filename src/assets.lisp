@@ -83,7 +83,9 @@
          (make-instance ',class ,@params)))
 
 (defun find-asset (name)
-  (gethash name *assets*))
+  (aif (gethash name *assets*)
+       it
+       (error "No such asset: ~A." name)))
 
 ;;; Asset versions
 

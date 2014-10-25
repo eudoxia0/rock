@@ -10,7 +10,8 @@
   :depends-on (:trivial-download
                :trivial-extract
                :trivial-types
-               :asdf)
+               :asdf
+               :anaphora)
   :components ((:module "src"
                 :components
                 ((:file "package")

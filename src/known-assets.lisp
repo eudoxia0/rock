@@ -255,6 +255,12 @@
   :js (list "js/bootstrap.min.js")
   :css (list "css/bootstrap.min.css"))
 
+(defasset bootstrap-vertical-tabs <github-asset>
+  :username "dbtek"
+  :name "bootstrap-vertical-tabs"
+  :versions (list (cons :1.2.0 "1a79a1ecb42611be39d3e65a6f380bdc83daec70"))
+  :css (list "bootstrap.vertical-tabs.min.css"))
+
 (defasset fontawesome <bootstrap-cdn-asset>
   :name "font-awesome"
   :versions (list :4.2.0)
@@ -266,8 +272,8 @@
                   :0.7.2
                   :0.7.1
                   :0.7.0)
-  :files (list "leaflet.js"
-               "leaflet.css"))
+  :js (list "leaflet.js"
+            "leaflet.css"))
 
 (defasset backbone.js <cdnjs-asset>
   :name "backbone.js"
@@ -275,7 +281,7 @@
                   :1.1.1
                   :1.1.0
                   :1.0.0)
-  :files (list "backbone.min.js"))
+  :js (list "backbone.min.js"))
 
 (defasset composer.js <github-asset>
   :username "lyonbros"
