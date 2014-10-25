@@ -4,7 +4,7 @@
 (in-package :rock-test)
 
 (defparameter +assets-directory+
-  (asdf:system-relative-pathname :rock #p"assets/"))
+  (asdf:system-relative-pathname :rock #p"t/assets/"))
 
 (defun asset-relative-path (path)
   (merge-pathnames path +assets-directory+))
@@ -33,7 +33,8 @@
                 (;; Bootstrap CSS
                  :css
                  :assets ((:bootstrap :3.2.0))
-                 :destination #p"css/style.css")))))
+                 :destination #p"css/style.css"))
+      :assets-directory #p"t/assets/")))
 
 (defun destroy-assets-directory ()
   (when (cl-fad:directory-exists-p +assets-directory+)
