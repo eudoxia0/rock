@@ -1,0 +1,71 @@
+<!DOCTYPE html><html><head><meta charset="utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Rock</title><link rel="stylesheet" href="assets/build/css/style.css" /></head><body><header><h1 class="title">Rock</h1></header><main><p>Rock is an asset manager for Common Lisp. It&apos;s basically a combination of
+<a href="http://bower.io/" >Bower</a> and <a href="http://webassets.readthedocs.org/en/latest/index.html" >webassets</a>.</p>
+
+<p>Rock takes care of downloading specific versions of libraries &ndash; jQuery,
+Bootstrap, FontAwesome &ndash; and bundling their files together so you can compile
+all your JavaScript and CSS into single files.</p>
+
+<h2>Features</h2>
+
+<ul>
+<li><strong>Library Manager</strong>: Download specific versions of the most common
+  libraries. You can have multiple versions of the same library, for example,
+  for migrating an application one subset at a time.</li>
+<li><strong>Asset Bundling</strong>: Compile the JS/CSS files of different libraries and your
+  own files into a single file. You can produce many bundles per application,
+  for example, a bundle with an old version of different libraries, and a bundle
+  with newer versions, for migrating a large application one subset at a time.</li>
+</ul>
+
+<h2>How it Works</h2>
+
+<p>Here&apos;s the Rock environment definition for this website:</p>
+
+<pre><code>;; We define an environment for the 'rock' ASDF system
+(defenv :rock
+  ;; These are our dependencies
+  :assets ((:jquery :2.1.1)
+           (:bootstrap :3.2.0)
+           (:highlight-lisp :0.1))
+  :bundles ((:js
+             ;; This is a JS bundle. It compiles the JS files
+             ;; of the dependencies below:
+             :assets ((:jquery :2.1.1)
+                      (:bootstrap :3.2.0)
+                      (:highlight-lisp :0.1))
+             ;; Our custom JS: assets/js/scripts.js
+             :files (list #p"js/scripts.js")
+             ;; Combined JS file: assets/build/js/scripts.js
+             :destination #p"js/scripts.js")
+            (:css
+             ;; This is a CSS bundle. Note that we don't
+             ;; include jQuery
+             :assets ((:bootstrap :3.2.0)
+                      (:highlight-lisp :0.1))
+             :files (list #p"css/style.css")
+             :destination #p"css/style.css")))
+
+;; Download the assets and compile the bundles for this
+;; environment. Dependencies are only downloaded when
+;; they're needed.
+(build :rock)</code></pre>
+
+<p>When the assets are built, you can start serving them using your favorite web
+framework.</p>
+
+<h2>Defining Custom Assets</h2>
+
+<h3>Contributing Assets</h3>
+
+<p>If you have a custom asset you use often, or an asset that&apos;s not included in
+Rock by default, you should <a href="https://github.com/eudoxia0/rock/issues" >open an issue</a> asking for its addition, or
+make a pull request including the asset definition.</p>
+
+<h2>Getting It</h2>
+
+<p>Until Rock is available on the <a href="http://www.quicklisp.org/" >Quicklisp</a> repository, simply clone the repo
+to your <code>local-projects</code> directory:</p>
+
+<pre><code>$ cd quicklisp/local-projects
+$ git clone https://github.com/eudoxia0/rock</code></pre>
+<section id="assets"><h2>Available Assets</h2><div class="panel-group" id="accordion"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-angular-js">angular.js</a></h4></div><div id="collapse-angular-js" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>1.2.26</li><li>1.2.25</li><li>1.2.24</li><li>1.2.23</li><li>1.2.22</li><li>1.2.21</li><li>1.2.20</li><li>1.2.19</li><li>1.2.18</li><li>1.2.17</li><li>1.2.16</li><li>1.2.15</li><li>1.2.14</li><li>1.2.13</li><li>1.2.12</li><li>1.2.11</li><li>1.2.10</li><li>1.2.9</li><li>1.2.8</li><li>1.2.7</li><li>1.2.6</li><li>1.2.5</li><li>1.2.4</li><li>1.2.3</li><li>1.2.2</li><li>1.2.1</li><li>1.2.0</li><li>1.0.8</li><li>1.0.7</li><li>1.0.6</li><li>1.0.5</li><li>1.0.4</li><li>1.0.3</li><li>1.0.2</li><li>1.0.1</li><li>1.3.0-rc.5</li><li>1.3.0-rc.4</li><li>1.3.0-rc.3</li><li>1.3.0-rc.2</li><li>1.3.0-rc.1</li><li>1.3.0-rc.0</li><li>1.3.0-beta.19</li><li>1.3.0-beta.18</li><li>1.3.0-beta.17</li><li>1.3.0-beta.16</li><li>1.3.0-beta.15</li><li>1.3.0-beta.14</li><li>1.3.0-beta.13</li><li>1.3.0-beta.12</li><li>1.3.0-beta.11</li><li>1.3.0-beta.10</li><li>1.3.0-beta.9</li><li>1.3.0-beta.8</li><li>1.3.0-beta.7</li><li>1.3.0-beta.6</li><li>1.3.0-beta.5</li><li>1.3.0-beta.4</li><li>1.3.0-beta.3</li><li>1.3.0-beta.2</li><li>1.3.0-beta.1</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-jquery">jquery</a></h4></div><div id="collapse-jquery" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>2.1.1</li><li>2.1.0</li><li>2.0.3</li><li>2.0.2</li><li>2.0.1</li><li>2.0.0</li><li>1.11.1</li><li>1.11.0</li><li>1.10.2</li><li>1.10.1</li><li>1.10.0</li><li>1.9.1</li><li>1.9.0</li><li>1.8.3</li><li>1.8.2</li><li>1.8.1</li><li>1.8.0</li><li>1.7.2</li><li>1.7.1</li><li>1.7.0</li><li>1.6.4</li><li>1.6.3</li><li>1.6.2</li><li>1.6.1</li><li>1.6.0</li><li>1.5.2</li><li>1.5.1</li><li>1.5.0</li><li>1.4.4</li><li>1.4.3</li><li>1.4.2</li><li>1.4.1</li><li>1.4.0</li><li>1.3.2</li><li>1.3.1</li><li>1.3.0</li><li>1.2.6</li><li>1.2.3</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-jquery-ui">jquery-ui</a></h4></div><div id="collapse-jquery-ui" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>1.11.2</li><li>1.11.1</li><li>1.11.0</li><li>1.10.4</li><li>1.10.3</li><li>1.10.2</li><li>1.10.1</li><li>1.10.0</li><li>1.9.2</li><li>1.9.1</li><li>1.9.0</li><li>1.8.24</li><li>1.8.23</li><li>1.8.22</li><li>1.8.21</li><li>1.8.20</li><li>1.8.19</li><li>1.8.18</li><li>1.8.17</li><li>1.8.16</li><li>1.8.15</li><li>1.8.14</li><li>1.8.13</li><li>1.8.12</li><li>1.8.11</li><li>1.8.10</li><li>1.8.9</li><li>1.8.8</li><li>1.8.7</li><li>1.8.6</li><li>1.8.5</li><li>1.8.4</li><li>1.8.2</li><li>1.8.1</li><li>1.8.0</li><li>1.7.3</li><li>1.7.2</li><li>1.7.1</li><li>1.7.0</li><li>1.6.0</li><li>1.5.3</li><li>1.5.2</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-mootools">mootools</a></h4></div><div id="collapse-mootools" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>1.5.1</li><li>1.5.0</li><li>1.4.5</li><li>1.4.4</li><li>1.4.3</li><li>1.4.2</li><li>1.4.1</li><li>1.4.0</li><li>1.3.2</li><li>1.3.1</li><li>1.3.0</li><li>1.2.5</li><li>1.2.4</li><li>1.2.3</li><li>1.2.2</li><li>1.2.1</li><li>1.1.2</li><li>1.1.1</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-prototype">prototype</a></h4></div><div id="collapse-prototype" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>1.7.2.0</li><li>1.7.1.0</li><li>1.7.0.0</li><li>1.6.1.0</li><li>1.6.0.3</li><li>1.6.0.2</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-three-js">three.js</a></h4></div><div id="collapse-three-js" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>r67</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-dojo">dojo</a></h4></div><div id="collapse-dojo" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>1.10.1</li><li>1.10.0</li><li>1.9.4</li><li>1.9.3</li><li>1.9.2</li><li>1.9.1</li><li>1.9.0</li><li>1.8.7</li><li>1.8.6</li><li>1.8.5</li><li>1.8.4</li><li>1.8.3</li><li>1.8.2</li><li>1.8.1</li><li>1.8.0</li><li>1.7.6</li><li>1.7.5</li><li>1.7.4</li><li>1.7.3</li><li>1.7.2</li><li>1.7.1</li><li>1.7.0</li><li>1.6.2</li><li>1.6.1</li><li>1.6.0</li><li>1.5.3</li><li>1.5.2</li><li>1.5.1</li><li>1.5.0</li><li>1.4.5</li><li>1.4.4</li><li>1.4.3</li><li>1.4.1</li><li>1.4.0</li><li>1.3.2</li><li>1.3.1</li><li>1.3.0</li><li>1.2.3</li><li>1.2.0</li><li>1.1.1</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-bootstrap">bootstrap</a></h4></div><div id="collapse-bootstrap" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>3.2.0</li><li>3.1.1</li><li>3.1.0</li><li>3.0.3</li><li>3.0.2</li><li>3.0.1</li><li>3.0.0</li><li>2.3.2</li><li>2.3.1</li><li>2.3.0</li><li>2.2.2</li><li>2.2.1</li><li>2.2.0</li><li>2.1.1</li><li>2.1.0</li><li>2.0.4</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-bootstrap-vertical-tabs">bootstrap-vertical-tabs</a></h4></div><div id="collapse-bootstrap-vertical-tabs" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>1.2.0</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-fontawesome">fontawesome</a></h4></div><div id="collapse-fontawesome" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>4.2.0</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-leaflet">leaflet</a></h4></div><div id="collapse-leaflet" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>0.7.3</li><li>0.7.2</li><li>0.7.1</li><li>0.7.0</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-backbone-js">backbone.js</a></h4></div><div id="collapse-backbone-js" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>1.1.2</li><li>1.1.1</li><li>1.1.0</li><li>1.0.0</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-composer-js">composer.js</a></h4></div><div id="collapse-composer-js" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>1.0</li></ul></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-highlight-lisp">highlight-lisp</a></h4></div><div id="collapse-highlight-lisp" class="panel-collapse collapse"><div class="panel-body"><ul>Versions:<li>0.1</li></ul></div></div></div></div></section></main><footer><ul><li>Made by <a href="https://github.com/eudoxia0">eudoxia</a></li><li class="credit">Images by <a href="https://www.flickr.com/photos/superfamous/">superfamous</a>, licensed under the <a href="http://creativecommons.org/licenses/by/3.0/">CC Attribution 3.0</a> license, via <a href="http://thestocks.im/">thestocks.im</a></li></ul></footer><script src="assets/build/js/scripts.js"></script></body></html>
