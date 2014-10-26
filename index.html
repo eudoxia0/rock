@@ -55,6 +55,47 @@ framework.</p>
 
 <h2>Defining Custom Assets</h2>
 
+<p>Sometimes you need to use a custom asset, like a small library that&apos;s not
+included in Rock&apos;s known assets. Rock makes it simple to add new assets before
+defining an environment.</p>
+
+<p>Assets are defined with the <code>defasset</code> macro. The first argument is the name of
+the asset (A symbol, not a keyword), and the second is the name of the asset
+class, and then the keyword arguments describing the asset.</p>
+
+<p>The following asset classes are defined:</p>
+
+<ul>
+<li><code>&lt;google-asset&gt;</code>: Assets from <a href="https://developers.google.com/speed/libraries/devguide" >Google&apos;s CDN</a>.</li>
+<li><code>&lt;bootstrap-cdn-asset&gt;</code>: Assets from the <a href="http://www.bootstrapcdn.com/" >Bootstrap CDN</a>.</li>
+<li><code>&lt;cdnjs-asset&gt;</code>: Assets from <a href="https://cdnjs.com/" >cdnjs</a>.</li>
+<li><code>&lt;github-asset&gt;</code>: Assets extracted from GitHub repos.</li>
+</ul>
+
+<p>All assets share the following keyword arguments:</p>
+
+<dl>
+
+<dt><code>:name</code></dt>
+<dd>The asset&apos;s internal name. This is what will go in the file download URL, so
+for example for <code>:angular.js</code> it&apos;s <code>&quot;angularjs&quot;</code> because that how Google&apos;s CDN
+likes it.</dd>
+<dt><code>:versions</code></dt>
+<dd>In most assets, this is simply a list of keywords, where each keyword
+represents a version, like <code>:1.2.3</code> or <code>:1.2-beta</code>. In the case of GitHub
+assets, this is a list of <code>(version-keyword . commit-string)</code> pairs.</dd>
+<dt><code>:js</code>, <code>:css</code></dt>
+<dd>A list of paths to the JS and CSS files the asset provides. For most
+JavaScript libraries, this is usually just a <code>.min.js</code> file.</dd>
+</dl>
+
+<p>For GitHub assets, <code>:name</code> refers to the name of the repository, and you have to
+provide a value to the <code>:username</code> argument, the GitHub username in which the
+library is stored.</p>
+
+<p>You can also read Rock&apos;s <a href="https://github.com/eudoxia0/rock/blob/master/src/known-assets.lisp" >built-in assets list</a> to know how actual
+assets are defined.</p>
+
 <h3>Contributing Assets</h3>
 
 <p>If you have a custom asset you use often, or an asset that&apos;s not included in
