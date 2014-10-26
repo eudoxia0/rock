@@ -53,6 +53,19 @@ Here's the Rock environment definition for this website:
 (build :rock)
 ```
 
+When the assets are built, you can start serving them using your favorite web
+framework.
+
+## Defining Custom Assets
+
+### Contributing Assets
+
+If you have a custom asset you use often, or an asset that's not included in
+Rock by default, you should [open an issue][issues] asking for its addition, or
+make a pull request including the asset definition.
+
+[issues]: https://github.com/eudoxia0/rock/issues
+
 ## Getting It
 
 Until Rock is available on the [Quicklisp][ql] repository, simply clone the repo

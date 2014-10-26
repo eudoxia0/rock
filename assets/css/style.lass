@@ -3,8 +3,8 @@
 
 (header
  :height "500px"
- :background-image "url(https://farm3.staticflickr.com/2840/9042399407_bf04388aca_o.jpg)"
- :background-size "100%"
+ :background-image "url(../../img/header.jpg)"
+ :background-position "center bottom"
  :overflow "hidden"
 
  (.title
@@ -35,7 +35,7 @@
 
 (footer
  :height "600px"
- :background-image "url(https://farm9.staticflickr.com/8202/8283076008_30fc9057f2_o.jpg)"
+ :background-image "url(../../img/footer.jpg)"
  :background-size "100%"
  :overflow "hidden"
 
@@ -44,7 +44,7 @@
   :padding-left "0"
   :color "#fff"
   :text-align "center"
-  :font-size "22px"
+  :font-size "15px"
   :margin "0 auto"
   :margin-top "240px"
   :width "50%"
