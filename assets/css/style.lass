@@ -50,10 +50,11 @@
  :background-size "100%"
  :overflow "hidden"
 
+ :color "#ccc"
+
  (ul
   :list-style-type "none"
   :padding-left "0"
-  :color "#fff"
   :text-align "center"
   :font-size "15px"
   :margin "0 auto"
