@@ -42,6 +42,9 @@
              :initarg :username
              :type string)))
 
+(defmethod version-commit ((asset <github-asset>) version)
+  (rest (assoc version (versions asset))))
+
 (defclass <web-asset> (<asset>)
   ((base-url :reader base-url
              :initarg :base-url
@@ -100,5 +103,9 @@
 
 (defmethod file-url ((asset-v <asset-version>) filepath)
   "The URL to a `filepath` in an asset version `asset-v`."
-  (format nil (format-string (asset asset-v))
-          (version asset-v) filepath))
+  (let ((version
+            (if (typep (asset asset-v) '<github-asset>)
+                (version-commit (asset asset-v)
+                              (version asset-v))
+                (version asset-v))))
+    (format nil (format-string (asset asset-v)) version filepath)))
