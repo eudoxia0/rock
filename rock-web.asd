@@ -10,7 +10,8 @@
                :cl-markup
                :lass
                :3bmd
-               :3bmd-ext-code-blocks)
+               :3bmd-ext-code-blocks
+               :3bmd-ext-definition-lists)
   :serial t
   :components ((:module "assets"
                 :components

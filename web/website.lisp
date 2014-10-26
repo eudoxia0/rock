@@ -89,7 +89,8 @@
 ;;; Pages
 
 (setf 3bmd-code-blocks:*code-blocks* t
-      3bmd:*smart-quotes* t)
+      3bmd:*smart-quotes* t
+      3bmd-definition-lists:*definition-lists* t)
 
 (defun parse-markdown (pathname)
   (with-output-to-string (str)

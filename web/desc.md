@@ -58,6 +58,49 @@ framework.
 
 ## Defining Custom Assets
 
+Sometimes you need to use a custom asset, like a small library that's not
+included in Rock's known assets. Rock makes it simple to add new assets before
+defining an environment.
+
+Assets are defined with the `defasset` macro. The first argument is the name of
+the asset (A symbol, not a keyword), and the second is the name of the asset
+class, and then the keyword arguments describing the asset.
+
+The following asset classes are defined:
+
+* `<google-asset>`: Assets from [Google's CDN][googlecdn].
+* `<bootstrap-cdn-asset>`: Assets from the [Bootstrap CDN][bscdn].
+* `<cdnjs-asset>`: Assets from [cdnjs][cdnjs].
+* `<github-asset>`: Assets extracted from GitHub repos.
+
+All assets share the following keyword arguments:
+
+`:name`
+: The asset's internal name. This is what will go in the file download URL, so
+for example for `:angular.js` it's `"angularjs"` because that how Google's CDN
+likes it.
+
+`:versions`
+: In most assets, this is simply a list of keywords, where each keyword
+represents a version, like `:1.2.3` or `:1.2-beta`. In the case of GitHub
+assets, this is a list of `(version-keyword . commit-string)` pairs.
+
+`:js`, `:css`
+: A list of paths to the JS and CSS files the asset provides. For most
+JavaScript libraries, this is usually just a `.min.js` file.
+
+For GitHub assets, `:name` refers to the name of the repository, and you have to
+provide a value to the `:username` argument, the GitHub username in which the
+library is stored.
+
+You can also read Rock's [built-in assets list][asset-list] to know how actual
+assets are defined.
+
+[googlecdn]: https://developers.google.com/speed/libraries/devguide
+[bscdn]: http://www.bootstrapcdn.com/
+[cdnjs]: https://cdnjs.com/
+[asset-list]: https://github.com/eudoxia0/rock/blob/master/src/known-assets.lisp
+
 ### Contributing Assets
 
 If you have a custom asset you use often, or an asset that's not included in
