@@ -52,3 +52,15 @@ Here's the Rock environment definition for this website:
 ;; they're needed.
 (build :rock)
 ```
+
+## Getting It
+
+Until Rock is available on the [Quicklisp][ql] repository, simply clone the repo
+to your `local-projects` directory:
+
+```
+$ cd quicklisp/local-projects
+$ git clone https://github.com/eudoxia0/rock
+```
+
+[ql]: http://www.quicklisp.org/

@@ -62,12 +62,13 @@
        (markup
         (:div :class "list-group-item"
           (:h4 :class "list-group-item-heading"
-            (:code asset-name))
+            (:strong asset-name))
           (:p :class "list-group-item-text"
-            "Versions: "
-            (format nil "~{~A~#[~:;, ~]~}"
-                    (loop for version in (version-list asset) collecting
-                      (rock::version-string version))))))))))
+            (:ul
+             "Versions:"
+             (loop for version in (version-list asset) collecting
+               (markup
+                (:li (rock::version-string version))))))))))))
 
 ;;; Pages
 
@@ -88,5 +89,5 @@
    (:main
     (raw +desc+)
     (:section :id "assets"
-              (:h1 "Available Assets")
+              (:h2 "Available Assets")
               (raw (available-assets))))))
