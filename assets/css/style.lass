@@ -21,7 +21,18 @@
  :width "60%"
 
  (p
-  :text-align "justify")
+  :text-align "justify"
+  :margin-bottom "20px")
+
+ (dl
+  :padding-left "20px"
+
+  (dd
+   :padding-left "40px"
+   :text-align "justify"))
+
+ (h2
+  :margin-bottom "20px")
 
  ((:or p ul)
   :font-size "16px"))
