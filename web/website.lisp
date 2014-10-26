@@ -34,8 +34,11 @@
 (defun header ()
   (markup
    (:header
-    (:h1 :class "title"
-         "Rock"))))
+    (:div :class "header-box"
+      (:h1 :class "title"
+           "Rock")
+      (:div :class "links gh-link"
+        (:a :href "https://github.com/eudoxia0/rock" "View on GitHub"))))))
 
 (defmacro page (&rest content)
   `(html5
@@ -84,7 +87,9 @@
                "Versions:"
                (loop for version in (version-list asset) collecting
                  (markup
-                   (:li (rock::version-string version)))))))))))))
+                   (:li (:code
+                         (concatenate 'string ":"
+                                      (rock::version-string version)))))))))))))))
 
 ;;; Pages
 
