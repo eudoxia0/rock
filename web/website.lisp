@@ -54,21 +54,37 @@
   (loop for pair in (rock::versions asset) collecting
     (first pair)))
 
+(defun clean-id-string (str)
+  (substitute #\- #\. str))
+
+(defun asset-id-ref (asset-name)
+  (clean-id-string (format nil "#collapse-~A" asset-name)))
+
+(defun asset-id (asset-name)
+  (clean-id-string (format nil "collapse-~A" asset-name)))
+
 (defun available-assets ()
   (markup
-   (:div :class "list-group"
+   (:div :class "panel-group"
+         :id "accordion"
      (loop for asset-name being the hash-key of rock::*assets*
            using (hash-value asset) collecting
        (markup
-        (:div :class "list-group-item"
-          (:h4 :class "list-group-item-heading"
-            (:strong asset-name))
-          (:p :class "list-group-item-text"
-            (:ul
-             "Versions:"
-             (loop for version in (version-list asset) collecting
-               (markup
-                (:li (rock::version-string version))))))))))))
+        (:div :class "panel panel-default"
+          (:div :class "panel-heading"
+            (:h4 :class "panel-title"
+              (:a :data-toggle "collapse"
+                  :data-parent "#accordion"
+                  :href (asset-id-ref asset-name)
+                  asset-name)))
+          (:div :id (asset-id asset-name)
+                :class "panel-collapse collapse"
+            (:div :class "panel-body"
+              (:ul
+               "Versions:"
+               (loop for version in (version-list asset) collecting
+                 (markup
+                   (:li (rock::version-string version)))))))))))))
 
 ;;; Pages
 
