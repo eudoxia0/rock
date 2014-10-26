@@ -62,7 +62,7 @@
   (concatenate 'string
                (name (asset asset-v))
                "-"
-               (string-downcase (symbol-name (version asset-v)))))
+               (version-string (version asset-v))))
 
 (defmethod asset-directory ((asset-v <asset-version>) (env <environment>))
   "The directory of an asset version within an environment."

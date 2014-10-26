@@ -101,6 +101,9 @@
             :type keyword))
   (:documentation "A particular version of an asset."))
 
+(defun version-string (version)
+  (string-downcase (symbol-name version)))
+
 (defmethod file-url ((asset-v <asset-version>) filepath)
   "The URL to a `filepath` in an asset version `asset-v`."
   (let ((version
