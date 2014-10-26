@@ -1,5 +1,3 @@
-# Rock: Assets for Common Lisp web apps
-
 Rock is an asset manager for Common Lisp. It's basically a combination of
 [Bower][bower] and [webassets][webassets].
 
@@ -10,7 +8,7 @@ all your JavaScript and CSS into single files.
 [bower]: http://bower.io/
 [webassets]: http://webassets.readthedocs.org/en/latest/index.html
 
-# Features
+## Features
 
 * **Library Manager**: Download specific versions of the most common
   libraries. You can have multiple versions of the same library, for example,
@@ -20,8 +18,26 @@ all your JavaScript and CSS into single files.
   for example, a bundle with an old version of different libraries, and a bundle
   with newer versions, for migrating a large application one subset at a time.
 
-# License
+## How it Works
 
-Copyright (c) 2014 Fernando Borretti (eudoxiahp@gmail.com)
+Here's the Rock environment definition for this website:
 
-Licensed under the MIT License.
+```
+(defenv :rock
+  :assets ((:jquery :2.1.1)
+           (:bootstrap :3.2.0)
+           (:highlight-lisp :0.1))
+  :bundles ((:js
+             :assets ((:jquery :2.1.1)
+                      (:bootstrap :3.2.0)
+                      (:highlight-lisp :0.1))
+             :files (list #p"js/scripts.js")
+             :destination #p"js/scripts.js")
+            (:css
+             :assets ((:bootstrap :3.2.0)
+                      (:highlight-lisp :0.1))
+             :files (list #p"css/style.css")
+             :destination #p"css/style.css")))
+
+(build :rock)
+```

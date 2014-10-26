@@ -1,5 +1,6 @@
 (body
  :color "#222")
+
 (header
  :height "500px"
  :background-image "url(https://farm3.staticflickr.com/2840/9042399407_bf04388aca_o.jpg)"
@@ -16,22 +17,20 @@
   :text-decoration "underline"))
 
 (main
- :margin-top "50px"
- :margin-bottom "50px"
+ :margin "50px auto"
+ :width "60%"
 
  (p
   :text-align "justify")
 
- (.desc
-  :margin "0 auto"
-  :width "80%"
-  :font-size "36px"))
+ ((:or p ul)
+  :font-size "16px"))
 
 ((:or (:and a :link)
       (:and a :visited)
       (:and a :hover)
       (:and a :active))
- :color "#E74C3C"
+ :color "#CF1020" ;; Lava
  :font-weight "bold")
 
 (footer
@@ -45,11 +44,11 @@
   :padding-left "0"
   :color "#fff"
   :text-align "center"
-  :font-size "26px"
+  :font-size "22px"
   :margin "0 auto"
   :margin-top "240px"
   :width "50%"
-  :padding "10px"
+  :padding "25px 15px"
 
   :background-color "rgba(0, 0, 0, 0.75)"
 

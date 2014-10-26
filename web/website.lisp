@@ -47,14 +47,19 @@
 
 ;;; Pages
 
+(setf 3bmd-code-blocks:*code-blocks* t
+      3bmd:*smart-quotes* t)
+
+(defun parse-markdown (pathname)
+  (with-output-to-string (str)
+    (3bmd:parse-string-and-print-to-stream
+     (uiop:read-file-string pathname)
+     str)))
+
+(defparameter +desc+
+  (parse-markdown (asdf:system-relative-pathname :rock #p"web/desc.md")))
+
 (defun index ()
   (page
    (:main
-    (:p :class "desc"
-        "Rock as an "
-        (:strong "asset manager")
-        " and "
-        (:strong "compiler")
-        " for Common Lisp web applications. It downloads different versions of
-the most popular web development libraries (Bootstrap, jQuery, FontAwesome,
-etc.) and lets you compile them to single files."))))
+    (raw +desc+))))

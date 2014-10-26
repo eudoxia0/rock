@@ -9,5 +9,6 @@
 assets/build/
 assets/bootstrap*
 assets/jquery*
+assets/highlight-lisp*
 *.css
 *.html

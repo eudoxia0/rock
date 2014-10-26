@@ -8,15 +8,23 @@
   :license "MIT"
   :depends-on (:rock
                :cl-markup
-               :lass)
+               :lass
+               :3bmd
+               :3bmd-ext-code-blocks)
   :serial t
-  :components ((:module "assets/css"
+  :components ((:module "assets"
                 :components
-                ((:static-file "style.lass")))
+                ((:module "css"
+                  :components
+                  ((:static-file "style.lass")))
+                 (:module "js"
+                  :components
+                  ((:static-file "scripts.js")))))
                (:module "web"
                 :serial t
                 :components
-                ((:file "website")
+                ((:static-file "desc.md")
+                 (:file "website")
                  (:file "files")
                  ;;; Assets are compiled last, the LASS has to be converted to
                  ;;; CSS first
