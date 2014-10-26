@@ -288,3 +288,10 @@
   :name "composer.js"
   :versions (list (cons :1.0 "170c0cc96a99e375818f91567043ced53d5cf734"))
   :js (list "composer.min.js"))
+
+(defasset highlight-lisp <github-asset>
+  :username "orthecreedence"
+  :name "highlight-lisp"
+  :versions (list (cons :0.1 "64c9e0a17a2aa50963bbeb68bef4a7308532f61a"))
+  :js (list "highlight-lisp.js")
+  :css (list "themes/github.css"))
