@@ -11,9 +11,7 @@ all your JavaScript and CSS into single files.
   libraries. You can have multiple versions of the same library, for example,
   for migrating an application one subset at a time.
 * **Asset Bundling**: Compile the JS/CSS files of different libraries and your
-  own files into a single file. You can produce many bundles per application,
-  for example, a bundle with an old version of different libraries, and a bundle
-  with newer versions, for migrating a large application one subset at a time.
+  own files into a single file.
 
 ## How it Works
 
