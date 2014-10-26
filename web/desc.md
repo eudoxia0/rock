@@ -5,9 +5,6 @@ Rock takes care of downloading specific versions of libraries -- jQuery,
 Bootstrap, FontAwesome -- and bundling their files together so you can compile
 all your JavaScript and CSS into single files.
 
-[bower]: http://bower.io/
-[webassets]: http://webassets.readthedocs.org/en/latest/index.html
-
 ## Features
 
 * **Library Manager**: Download specific versions of the most common
@@ -96,19 +93,6 @@ library is stored.
 You can also read Rock's [built-in assets list][asset-list] to know how actual
 assets are defined.
 
-[googlecdn]: https://developers.google.com/speed/libraries/devguide
-[bscdn]: http://www.bootstrapcdn.com/
-[cdnjs]: https://cdnjs.com/
-[asset-list]: https://github.com/eudoxia0/rock/blob/master/src/known-assets.lisp
-
-### Contributing Assets
-
-If you have a custom asset you use often, or an asset that's not included in
-Rock by default, you should [open an issue][issues] asking for its addition, or
-make a pull request including the asset definition.
-
-[issues]: https://github.com/eudoxia0/rock/issues
-
 ## Getting It
 
 Until Rock is available on the [Quicklisp][ql] repository, simply clone the repo
@@ -119,4 +103,20 @@ $ cd quicklisp/local-projects
 $ git clone https://github.com/eudoxia0/rock
 ```
 
+## Available Assets
+
+This is a list of assets that come built in with Rock. If you have a custom
+asset you use often, or an asset that's not included in Rock by default, you
+should [open an issue][issues] asking for its addition, or make a pull request
+including the asset definition.
+
+Click on an asset's name to see the list of versions.
+
+[bower]: http://bower.io/
+[webassets]: http://webassets.readthedocs.org/en/latest/index.html
+[googlecdn]: https://developers.google.com/speed/libraries/devguide
+[bscdn]: http://www.bootstrapcdn.com/
+[cdnjs]: https://cdnjs.com/
+[asset-list]: https://github.com/eudoxia0/rock/blob/master/src/known-assets.lisp
 [ql]: http://www.quicklisp.org/
+[issues]: https://github.com/eudoxia0/rock/issues

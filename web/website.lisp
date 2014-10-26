@@ -106,5 +106,4 @@
    (:main
     (raw +desc+)
     (:section :id "assets"
-              (:h2 "Available Assets")
-              (raw (available-assets))))))
+      (raw (available-assets))))))
