@@ -115,7 +115,10 @@
                       full-file-pathnames))))
     (concatenate-files files-to-concatenate
                        (merge-pathnames (destination bundle)
-                                        (env-build-directory env)))))
+                                        (env-build-directory env))
+                       (if (eq (kind bundle) :js)
+                           (format nil ";~%/* -------- */~%")
+                           ""))))
 
 (defmethod build-env ((env <environment>))
   "Build an environment: Download all dependencies and build all its bundles."

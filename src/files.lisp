@@ -1,6 +1,6 @@
 (in-package :rock)
 
-(defun concatenate-files (files target)
+(defun concatenate-files (files target &optional (joiner ""))
   "Concatenate the files in `files` (A list of pathnames) into `target`. Ensure
 the parent directories of `target` exist."
   (let ((dir (fad:pathname-directory-pathname target)))
@@ -13,7 +13,8 @@ the parent directories of `target` exist."
       (with-open-file (input-stream file
                                     :direction :input
                                     :if-does-not-exist :error)
-        (cl-fad:copy-stream input-stream output-stream)))))
+        (cl-fad:copy-stream input-stream output-stream))
+      (write-string joiner output-stream))))
 
 (defun download (url destination)
   (unless (probe-file destination)
