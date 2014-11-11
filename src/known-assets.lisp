@@ -286,7 +286,7 @@
 (defasset composer.js <github-asset>
   :username "lyonbros"
   :name "composer.js"
-  :versions (list (cons :1.0 "170c0cc96a99e375818f91567043ced53d5cf734"))
+  :versions (list (cons :1.0 "e5c8dbe1a218a1a60e2028f8ff6232f2e53fb989"))
   :js (list "composer.min.js"))
 
 (defasset highlight-lisp <github-asset>
