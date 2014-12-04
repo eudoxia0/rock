@@ -12,15 +12,15 @@
          :documentation "The name of the asset as a string.")
    (js :reader js
        :initarg :js
-       :type (list-of string)
+       :type (proper-list string)
        :documentation "A list of JavaScript files.")
    (css :reader css
         :initarg :css
-        :type (list-of string)
+        :type (proper-list string)
         :documentation "A list of CSS files.")
    (files :reader files
           :initarg :files
-          :type (list-of string)
+          :type (proper-list string)
           :documentation "A list of general assets.")
    (versions :reader versions
              :initarg :versions
@@ -52,7 +52,7 @@
              :documentation "The base URL for the files in the file slot.")
    (files :reader files
           :initarg :files
-          :type (list-of string)
+          :type (proper-list string)
           :documentation "A list of general assets."))
   (:documentation "A collection of files to download from some base URL. Useful
   for downloading images, etc."))

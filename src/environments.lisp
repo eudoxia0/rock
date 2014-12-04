@@ -9,11 +9,11 @@
          :documentation "A `:js` bundle or a `:css` bundle.")
    (assets :reader assets
            :initarg :assets
-           :type (list-of <asset-version>)
+           :type (proper-list <asset-version>)
            :documentation "The assets from the environment that will be bundled.")
    (files :reader files
           :initarg :files
-          :type (list-of pathname))
+          :type (proper-list pathname))
    (destination :reader destination
                 :initarg :destination
                 :type pathname
@@ -32,10 +32,10 @@
                      :type pathname)
    (dependencies :reader dependencies
                  :initarg :dependencies
-                 :type (list-of <asset-version>))
+                 :type (proper-list <asset-version>))
    (bundles :reader bundles
             :initarg :bundles
-            :type (list-of <bundle>))))
+            :type (proper-list <bundle>))))
 
 (defparameter *environments*
   (make-hash-table))
