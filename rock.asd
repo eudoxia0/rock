@@ -7,6 +7,7 @@
   :version "0.1"
   :author "Fernando Borretti"
   :license "MIT"
+  :homepage "https://github.com/eudoxia0/rock"
   :depends-on (:trivial-download
                :trivial-extract
                :trivial-types
