@@ -1,5 +1,7 @@
 # Rock: Assets for Common Lisp web apps
 
+[![Build Status](https://travis-ci.org/eudoxia0/rock.svg?branch=master)](https://travis-ci.org/eudoxia0/rock)
+
 Rock is an asset manager for Common Lisp. It's basically a combination of
 [Bower][bower] and [webassets][webassets].
 
