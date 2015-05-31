@@ -6,6 +6,7 @@
 (defsystem rock-test
   :author "Fernando Borretti"
   :license "MIT"
+  :description "Rock tests"
   :depends-on (:rock
                :fiveam)
   :components ((:module "t"
